@@ -90,6 +90,12 @@ pipeline {
                 GIT_REPO_NAME = "End-to-End-Kubernetes-Three-Tier-DevSecOps-Project"
                 GIT_USER_NAME = "volley123"
             }
+
+        stage('Clean Workspace') {
+            steps {
+                cleanWs()
+            }
+        }
             steps {
                 dir('Kubernetes-Manifests-file/Frontend') {
                     withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
