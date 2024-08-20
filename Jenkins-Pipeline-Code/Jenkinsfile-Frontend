@@ -90,12 +90,6 @@ pipeline {
                 GIT_REPO_NAME = "End-to-End-Kubernetes-Three-Tier-DevSecOps-Project"
                 GIT_USER_NAME = "volley123"
             }
-        }    
-        stage('Clean Workspace') {
-            steps {
-                cleanWs()
-            }
-        }
             steps {
                 dir('Kubernetes-Manifests-file/Frontend') {
                     withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
@@ -103,6 +97,7 @@ pipeline {
                             git config user.email "devopstest@gmail.com"
                             git config user.name "volley123"
                             git status
+                            git clean -fdx
                             BUILD_NUMBER=${BUILD_NUMBER}
                             echo $BUILD_NUMBER
                             imageTag=$(grep -oP '(?<=frontend:)[^ ]+' deployment.yaml)
@@ -114,6 +109,13 @@ pipeline {
                         '''
                     }
                 }
+            }
+        }
+    }
+   
+        stage('Clean Workspace') {
+            steps {
+                cleanWs()
             }
         }
     }
