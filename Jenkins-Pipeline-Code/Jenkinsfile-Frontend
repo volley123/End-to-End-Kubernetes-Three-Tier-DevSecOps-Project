@@ -111,7 +111,6 @@ pipeline {
                 }
             }
         }
-    }
    
         stage('Clean Workspace') {
             steps {
@@ -119,3 +118,4 @@ pipeline {
             }
         }
     }
+}    
